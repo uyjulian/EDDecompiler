@@ -1451,4 +1451,13 @@ def procfile(file):
     scena.SaveToFile(file + '.py')
 
 if __name__ == '__main__':
-    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
+#    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
+    files = iterlib.forEachGetFiles(sys.argv[1:], '*.bin')
+    Log.OpenLog(sys.argv[1] + '\..\log.txt')
+
+    for file in files:
+        plog('START %s' % file)
+        procfile(file)
+        plog('FINISHED %s' % file)
+
+    Log.CloseLog()

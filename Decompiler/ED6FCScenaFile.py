@@ -2,8 +2,8 @@ from ED6FCScenarioScript import *
 from Instruction.ScenaOpTableED6FC import *
 from GameData.ItemNameMap import *
 
-def plog(*value, sep = ' ', end = '\n', file = sys.stdout, flush = False):
-    pass
+#def plog(*value, sep = ' ', end = '\n', file = sys.stdout, flush = False):
+#    pass
 
 #plog = print
 
