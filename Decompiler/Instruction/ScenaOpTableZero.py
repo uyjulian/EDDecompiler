@@ -1509,8 +1509,8 @@ def scp_set_scenario_flags(data):
         if len(data.Arguments) == 2:
             offset, bit = data.Arguments[0], data.Arguments[1]
             if offset >= 0x220:
-                pass
-                #raise Exception('offset must be less than 0x220')
+                #pass
+                raise Exception('offset must be less than 0x220')
 
             data.Arguments = [MakeScenarioFlags(offset, bit)]
 
