@@ -1666,7 +1666,7 @@ edao_op_list = \
     inst(OP_13,                     'W'),   # poswnd
     inst(BlurSwitch,                'LLLBL'),
     inst(CancelBlur,                'I'),
-    inst(OP_16,                     'B'),
+    inst(OP_16,                     'BBBB'),
     inst(ShowSaveMenu),
     inst(EventBegin,                'B'),
     inst(EventEnd,                  'B'),
@@ -1887,7 +1887,7 @@ MenuCmd(0x0, 1)
 cmd: 0 = create
 layer: 1
 
-MenuCmd(0x1, 1, '莉夏')
+MenuCmd(0x1, 1, '闔牙､�')
 cmd: 1 = add item
 layer: 1
 text:
@@ -1901,19 +1901,19 @@ unknown: 1
 
 
 
-羁绊
+鄒∫ｻ�
 OP_50(chr_offset, (scpexpr(EXPR_PUSH_LONG, const), scpexpr(EXPR_ADD_SAVE), scpexpr(EXPR_END)))
-0x64: 琪雅
-0x65: 艾莉
-0x66: 缇欧
-0x67: 兰迪
-0x68: 诺艾尔
-0x69: 瓦吉
-0x6A: 莉夏
-0x6C: 伊莉娅
-0x6D: 塞茜尔
-0x6E: 芙兰
-0x6F: 修利
+0x64: 逅ｪ髮�
+0x65: 濶ｾ闔�
+0x66: 郛�谺ｧ
+0x67: 蜈ｰ霑ｪ
+0x68: 隸ｺ濶ｾ蟆�
+0x69: 逑ｦ蜷�
+0x6A: 闔牙､�
+0x6C: 莨願脂螽�
+0x6D: 蝪櫁懸蟆�
+0x6E: 闃吝�ｰ
+0x6F: 菫ｮ蛻ｩ
 
 '''
 

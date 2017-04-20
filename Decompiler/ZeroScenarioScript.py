@@ -495,7 +495,7 @@ class ScenarioChipFrameInfo:
         self.Reserve        = fs.ReadByte()
         self.SubChipCount   = fs.ReadByte()
         self.SubChipIndex   = struct.unpack('<' + 'B' * self.SubChipCount, fs.read(self.SubChipCount))
-
+        
         if self.SubChipCount != 8:
             fs.seek(8 - self.SubChipCount, io.SEEK_CUR)
 
@@ -1013,13 +1013,14 @@ class ScenarioInfo:
         self.ScenaFunctions = list(struct.unpack('<' + 'I' * int(self.ScenaFunctionTable.Size / 4), fs.read(self.ScenaFunctionTable.Size)))
 
 
-        ChipFrameInfoNumber = 0
+        ChipFrameInfoLast = self.ChipFrameInfoOffset
         for monster in self.ScnInfo[SCN_INFO_MONSTER]:
-            ChipFrameInfoNumber = max(ChipFrameInfoNumber, max(monster.StandFrameInfoIndex, monster.MoveFrameInfoIndex))
+            ChipFrameInfoLast = max(ChipFrameInfoLast, max(monster.StandFrameInfoIndex, monster.MoveFrameInfoIndex))
 
         fs.seek(self.ChipFrameInfoOffset)
         self.ChipFrameInfo = []
-        for i in range(ChipFrameInfoNumber + 1):
+        
+        while fs.tell() < self.ScenaFunctionTable.Offset:
             self.ChipFrameInfo.append(ScenarioChipFrameInfo(fs))
 
         fs.seek(self.StringTableOffset)
