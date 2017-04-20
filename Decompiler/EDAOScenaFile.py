@@ -468,7 +468,7 @@ def SaveToFile():
 
     fs.seek(0)
     fs.write(scena.binary())
-
+    fs.close()
     print('done')
 
     #input()

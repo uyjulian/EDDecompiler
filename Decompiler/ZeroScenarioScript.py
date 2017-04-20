@@ -1,7 +1,6 @@
 from Assembler.Assembler2 import *
-from Base.EDAOBase import *
+from Base.ZeroBase import *
 import Instruction.ScenaOpTableZero as edao
-from ED6FCScenaFile import plog
 
 CODE_PAGE = edao.CODE_PAGE
 
@@ -1065,7 +1064,6 @@ class ScenarioInfo:
                 codeblocks.append(blockoffsetmap[func])
                 continue
             
-            plog('func = %08X' % func)
             fs.seek(func)
 
             data = Disassembler.DisasmData()
@@ -1251,7 +1249,7 @@ class ScenarioInfo:
         mapname = mapname if mapname != '' else 'MapIndex'
 
         hdr = []
-        hdr.append('from ScenarioHelper import *')
+        hdr.append('from ZeroScenarioHelper import *')
         hdr.append('')
         hdr.append('CreateScenaFile(')
         hdr.append('    "%s",                # FileName'        % filename)

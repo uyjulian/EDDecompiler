@@ -180,65 +180,65 @@ InstructionNames[0xAC]  = 'OP_AC'
 InstructionNames[0xAD]  = 'OP_AD'
 InstructionNames[0xAE]  = 'OP_AE'
 InstructionNames[0xAF]  = 'OP_AF'
-InstructionNames[0xB2 - 2]  = 'OP_B2'
-InstructionNames[0xB3 - 2]  = 'OutputDebugInt'
-InstructionNames[0xB4 - 2]  = 'OP_B4'
-InstructionNames[0xB5 - 2]  = 'OP_B5'
-InstructionNames[0xB6 - 2]  = 'LoadOps'
-InstructionNames[0xB7 - 2]  = 'ModifyEventFlags'
-InstructionNames[0xB8 - 2]  = 'PlayMovie'
-InstructionNames[0xB9 - 2]  = 'OP_B9'
-InstructionNames[0xBA - 2]  = 'ReplaceBGM'
-InstructionNames[0xBC - 2]  = 'OP_BC'
-InstructionNames[0xBD - 2]  = 'UseItem'
-InstructionNames[0xBE - 2]  = 'OP_BE'
-InstructionNames[0xBF - 2]  = 'OP_BF'
-InstructionNames[0xC0 - 2]  = 'SetChrChipPat'
-InstructionNames[0xC2 - 2]  = 'LoadChrChipPat'
-InstructionNames[0xC3 - 2]  = 'OP_C3'
-InstructionNames[0xC4 - 2]  = 'OP_C4'
-InstructionNames[0xC5 - 2]  = 'MiniGame'
-InstructionNames[0xC7 - 2]  = 'OP_C7'
-InstructionNames[0xC9 - 2]  = 'OP_C9'
-InstructionNames[0xCA - 2]  = 'CreatePortrait'
-InstructionNames[0xCB - 2]  = 'OP_CB'
-InstructionNames[0xCC - 2]  = 'OP_CC'
-InstructionNames[0xCD - 2]  = 'PlaceName2'
-InstructionNames[0xCE - 2]  = 'PartySelect'
-InstructionNames[0xCF - 2]  = 'OP_CF'
-InstructionNames[0xD0 - 2]  = 'MenuCmd'
-InstructionNames[0xD1 - 2]  = 'OP_D1'
-InstructionNames[0xD2 - 2]  = 'OP_D2'
-InstructionNames[0xD3 - 2]  = 'OP_D3'
-InstructionNames[0xD4 - 2]  = 'OP_D4'
-InstructionNames[0xD5 - 2]  = 'OP_D5'
-InstructionNames[0xD6 - 2]  = 'LoadChrToIndex'
-InstructionNames[0xD7 - 2]  = 'OP_D7'
-InstructionNames[0xD8 - 2]  = 'OP_D8'
-InstructionNames[0xD9 - 2]  = 'OP_D9'
-InstructionNames[0xDA - 2]  = 'OP_DA'
-InstructionNames[0xDC - 2]  = 'OP_DC'
-InstructionNames[0xDD - 2]  = 'OP_DD'
-InstructionNames[0xDE - 2]  = 'OP_DE'
-InstructionNames[0xDF - 2]  = 'LoadAnimeChip'
-InstructionNames[0xE0 - 2]  = 'OP_E0'
-InstructionNames[0xE2 - 2]  = 'OP_E2'
-InstructionNames[0xE3 - 2]  = 'OP_E3'
-InstructionNames[0xE4 - 2]  = 'OP_E4'
-InstructionNames[0xE5 - 2]  = 'OP_E5'
-InstructionNames[0xE6 - 2]  = 'OP_E6'
-InstructionNames[0xE7 - 2]  = 'OP_E7'
-InstructionNames[0xE8 - 2]  = 'OP_E8'
-InstructionNames[0xE9 - 2]  = 'ShowSaveClearMenu'
-InstructionNames[0xF0 - 2]  = 'OP_F0'
-InstructionNames[0xF3 - 2]  = 'OP_F3'
-InstructionNames[0xF4 - 2]  = 'OP_F4'
-InstructionNames[0xFA - 2]  = 'OP_FA'
-InstructionNames[0xFB - 2]  = 'OP_FB'
-InstructionNames[0xFC - 2]  = 'OP_FC'
-InstructionNames[0xFD - 2]  = 'OP_FD'
-InstructionNames[0xFE - 2]  = 'OP_FE'
-InstructionNames[0xFF - 2]  = 'OP_FF'
+InstructionNames[0xB0]  = 'OP_B0'
+InstructionNames[0xB1]  = 'OutputDebugInt'
+InstructionNames[0xB2]  = 'OP_B2'
+InstructionNames[0xB3]  = 'OP_B3'
+InstructionNames[0xB4]  = 'LoadOps'
+InstructionNames[0xB5]  = 'ModifyEventFlags'
+InstructionNames[0xB6]  = 'PlayMovie'
+InstructionNames[0xB7]  = 'OP_B7'
+InstructionNames[0xB8]  = 'ReplaceBGM'
+InstructionNames[0xBA]  = 'OP_BA'
+InstructionNames[0xBB]  = 'UseItem'
+InstructionNames[0xBC]  = 'OP_BC'
+InstructionNames[0xBD]  = 'OP_BD'
+InstructionNames[0xBE]  = 'SetChrChipPat'
+InstructionNames[0xC0]  = 'LoadChrChipPat'
+InstructionNames[0xC1]  = 'OP_C1'
+InstructionNames[0xC2]  = 'OP_C2'
+InstructionNames[0xC3]  = 'MiniGame'
+InstructionNames[0xC5]  = 'OP_C5'
+InstructionNames[0xC7]  = 'OP_C7'
+InstructionNames[0xC8]  = 'CreatePortrait'
+InstructionNames[0xC9]  = 'OP_C9'
+InstructionNames[0xCA]  = 'OP_CA'
+InstructionNames[0xCB]  = 'PlaceName2'
+InstructionNames[0xCC]  = 'PartySelect'
+InstructionNames[0xCD]  = 'OP_CD'
+InstructionNames[0xCE]  = 'MenuCmd'
+InstructionNames[0xCF]  = 'OP_CF'
+InstructionNames[0xD0]  = 'OP_D0'
+InstructionNames[0xD1]  = 'OP_D1'
+InstructionNames[0xD2]  = 'OP_D2'
+InstructionNames[0xD3]  = 'OP_D3'
+InstructionNames[0xD4]  = 'LoadChrToIndex'
+InstructionNames[0xD5]  = 'OP_D5'
+InstructionNames[0xD6]  = 'OP_D6'
+InstructionNames[0xD7]  = 'OP_D7'
+InstructionNames[0xD8]  = 'OP_D8'
+InstructionNames[0xDA]  = 'OP_DA'
+InstructionNames[0xDB]  = 'OP_DB'
+InstructionNames[0xDC]  = 'OP_DC'
+InstructionNames[0xDD]  = 'LoadAnimeChip'
+InstructionNames[0xDE]  = 'OP_DE'
+InstructionNames[0xE0]  = 'OP_E0'
+InstructionNames[0xE1]  = 'OP_E1'
+InstructionNames[0xE2]  = 'OP_E2'
+InstructionNames[0xE3]  = 'OP_E3'
+InstructionNames[0xE4]  = 'OP_E4'
+InstructionNames[0xE5]  = 'OP_E5'
+InstructionNames[0xE6]  = 'OP_E6'
+InstructionNames[0xE7]  = 'ShowSaveClearMenu'
+InstructionNames[0xEE]  = 'OP_EE'
+InstructionNames[0xF1]  = 'OP_F1'
+InstructionNames[0xF2]  = 'OP_F2'
+InstructionNames[0xF8]  = 'OP_F8'
+InstructionNames[0xF9]  = 'OP_F9'
+InstructionNames[0xFA]  = 'OP_FA'
+InstructionNames[0xFB]  = 'OP_FB'
+InstructionNames[0xFC]  = 'OP_FC'
+InstructionNames[0xFD]  = 'OP_FD'
 
 for op, name in InstructionNames.items():
     expr = '%s = 0x%08X' % (name, op)
@@ -1509,7 +1509,8 @@ def scp_set_scenario_flags(data):
         if len(data.Arguments) == 2:
             offset, bit = data.Arguments[0], data.Arguments[1]
             if offset >= 0x220:
-                raise Exception('offset must be less than 0x220')
+                pass
+                #raise Exception('offset must be less than 0x220')
 
             data.Arguments = [MakeScenarioFlags(offset, bit)]
 
@@ -1812,65 +1813,65 @@ edao_op_list = \
     inst(OP_AD,                     'W'),
     inst(OP_AE,                     'WW'),
     inst(OP_AF,                     'B'),
-    inst(OP_B2,                     'W'),
+    inst(OP_B0,                     'W'),
     inst(OutputDebugInt,            'B'),
-    inst(OP_B4,                     'B'),
-    inst(OP_B5,                     'BW'),
+    inst(OP_B2,                     'B'),
+    inst(OP_B3,                     'BW'),
     inst(LoadOps),                                                  # obsolete
     inst(ModifyEventFlags,          'CCW'),     # ModifyEventFlags(set_or_clear, event_index, flags)   0: set, 1: clear
     inst(PlayMovie,                 'BSWW'),
-    inst(OP_B9,                     'B'),
+    inst(OP_B7,                     'B'),
     inst(ReplaceBGM,                'MM'),
-    inst(OP_BC,                     'B'),
+    inst(OP_BA,                     'B'),
     inst(UseItem,                   'WW'),
-    inst(OP_BE,                     'BW'),
-    inst(OP_BF,                     'BB'),
+    inst(OP_BC,                     'BW'),
+    inst(OP_BD,                     'BB'),
     inst(SetChrChipPat,             'BBL'),                         # SetChrChipPat(chr_id, func_id, param)
     inst(LoadChrChipPat),
-    inst(OP_C3,                     'BBWWWBiiiiii'),
-    inst(OP_C4,                     'BBWW'),
+    inst(OP_C1,                     'BBWWWBiiiiii'),
+    inst(OP_C2,                     'BBWW'),
     inst(MiniGame,                  'BLLLLLLLL'),
-    inst(OP_C7,                     'BB'),
-    inst(OP_C9,                     'BL'),
+    inst(OP_C5,                     'BB'),
+    inst(OP_C7,                     'BL'),
     inst(CreatePortrait,            'CHHHHHHHHHHHHLBS'),
-    inst(OP_CB,                     'BBLLL'),
-    inst(OP_CC,                     'BBB'),
+    inst(OP_C9,                     'BBLLL'),
+    inst(OP_CA,                     'BBB'),
     inst(PlaceName2,                'hhSBh'),       # PlaceName2(x, y, itp_name, 0, duration)
     inst(PartySelect,               'C'),           # PartySelect(0 = select menu, save = 1, restore = 2)
-    inst(OP_CF,                     NO_OPERAND,             0,                          scp_cf),
+    inst(OP_CD,                     NO_OPERAND,             0,                          scp_cf),
     inst(MenuCmd,                   NO_OPERAND,             0,                          scp_menu_cmd),
-    inst(OP_D1,                     'W'),
-    inst(OP_D2,                     NO_OPERAND,             0,                          scp_d2),
-    inst(OP_D3,                     'WBS'),
-    inst(OP_D4,                     'LL'),
-    inst(OP_D5,                     'WLLLL'),
+    inst(OP_CF,                     'W'),
+    inst(OP_D0,                     NO_OPERAND,             0,                          scp_d2),
+    inst(OP_D1,                     'WBS'),
+    inst(OP_D2,                     'LL'),
+    inst(OP_D3,                     'WLLLL'),
     inst(LoadChrToIndex,            NO_OPERAND,             0,                          scp_load_chr),
-    inst(OP_D7,                     'B'),
-    inst(OP_D8,                     'BB'),
-    inst(OP_D9,                     'BB'),
+    inst(OP_D5,                     'B'),
+    inst(OP_D6,                     'BB'),
+    inst(OP_D7,                     'BB'),
+    inst(OP_D8,                     'B'),
     inst(OP_DA,                     'B'),
-    inst(OP_DC,                     'B'),
-    inst(OP_DD),
-    inst(OP_DE,                     'S'),
+    inst(OP_DB),
+    inst(OP_DC,                     'S'),
     inst(LoadAnimeChip,             'WBB'),
-    inst(OP_E0,                     'BB'),
-    inst(OP_E2,                     'B'),
-    inst(OP_E3,                     'LLL'),
-    inst(OP_E4,                     NO_OPERAND,             0,                          scp_e4),
-    inst(OP_E5,                     'B'),
-    inst(OP_E6,                     'BBBBBBL'),
-    inst(OP_E7),
-    inst(OP_E8),
+    inst(OP_DE,                     'BB'),
+    inst(OP_E0,                     'B'),
+    inst(OP_E1,                     'LLL'),
+    inst(OP_E2,                     NO_OPERAND,             0,                          scp_e4),
+    inst(OP_E3,                     'B'),
+    inst(OP_E4,                     'BBBBBBL'),
+    inst(OP_E5),
+    inst(OP_E6),
     inst(ShowSaveClearMenu),
-    inst(OP_F0,                     'BW'),
-    inst(OP_F3,                     'i'),
-    inst(OP_F4,                     'B'),
+    inst(OP_EE,                     'BW'),
+    inst(OP_F1,                     'i'),
+    inst(OP_F2,                     'B'),
+    inst(OP_F8,                     'W'),
+    inst(OP_F9,                     'WB'),
     inst(OP_FA,                     'W'),
-    inst(OP_FB,                     'WB'),
-    inst(OP_FC,                     'W'),
-    inst(OP_FD,                     'WW'),
-    inst(OP_FE,                     'B'),
-    inst(OP_FF,                     'BLLL'),
+    inst(OP_FB,                     'WW'),
+    inst(OP_FC,                     'B'),
+    inst(OP_FD,                     'BLLL'),
 ]
 
 del inst

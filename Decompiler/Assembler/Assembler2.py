@@ -182,8 +182,6 @@ class Disassembler:
             if pos in DisasmTable: break
             if pos >= endofblock: break
             
-            plog('pos = %08X' % pos)
-
             #offsetlist[pos] = True
 
             handlerdata                     = HandlerData(HANDLER_REASON_DISASM)
