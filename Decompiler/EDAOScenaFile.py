@@ -53,6 +53,9 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
     for i in range(len(IncludeList)):
         scena.IncludedScenario[i] = ScenarioFileIndex(IncludeList[i]).Index()
 
+    if len(sys.argv) > 1:
+        FileName = sys.argv[1] + '\\' + FileName
+
     scena.fs = fileio.FileStream(FileName, 'wb+')
     scena.fs.seek(0x94)
 
