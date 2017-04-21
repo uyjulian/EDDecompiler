@@ -1888,7 +1888,7 @@ MenuCmd(0x0, 1)
 cmd: 0 = create
 layer: 1
 
-MenuCmd(0x1, 1, 'ÀòÏÄ')
+MenuCmd(0x1, 1, 'è‰å¤')
 cmd: 1 = add item
 layer: 1
 text:
@@ -1902,19 +1902,19 @@ unknown: 1
 
 
 
-î¿°í
+ç¾ç»Š
 OP_50(chr_offset, (scpexpr(EXPR_PUSH_LONG, const), scpexpr(EXPR_ADD_SAVE), scpexpr(EXPR_END)))
-0x64: ç÷ÑÅ
-0x65: °¬Àò
-0x66: ç¾Å·
-0x67: À¼µÏ
-0x68: Åµ°¬¶û
-0x69: Íß¼ª
-0x6A: ÀòÏÄ
-0x6C: ÒÁÀòæ«
-0x6D: ÈûÜç¶û
-0x6E: Ü½À¼
-0x6F: ĞŞÀû
+0x64: çªé›…
+0x65: è‰¾è‰
+0x66: ç¼‡æ¬§
+0x67: å…°è¿ª
+0x68: è¯ºè‰¾å°”
+0x69: ç“¦å‰
+0x6A: è‰å¤
+0x6C: ä¼Šè‰å¨…
+0x6D: å¡èŒœå°”
+0x6E: èŠ™å…°
+0x6F: ä¿®åˆ©
 
 '''
 
