@@ -23,6 +23,7 @@ class ScenarioInfoPort(ScenarioInfo):
         self.PrevousHandlerData = None
 
         self.ScpFunctionList    = []
+        self.Labels['loc_FFFFABCD'] = 0xFFFFABCD
 
 scena = ScenarioInfoPort()
 
