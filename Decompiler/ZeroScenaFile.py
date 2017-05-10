@@ -61,7 +61,7 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
 
     pos = scena.fs.tell()
 
-    scena.ChipFrameInfoOffset = pos
+    scena.ChipFrameInfoOffset = 0
     scena.PlaceNameOffset = pos
 
     for i in range(SCN_INFO_MAXIMUM):
@@ -299,12 +299,14 @@ def DeclActor(TriggerX, TriggerZ, TriggerY, TriggerRange, ActorX, ActorZ, ActorY
     scena.fs.write(actor.binary())
 
 def ScpFunction(FunctionList):
-
     if not IsTupleOrList(FunctionList):
         raise Exception('accept function list only')
 
     scena.ScenaFunctionTable.Offset = scena.fs.tell()
     scena.ScenaFunctionTable.Size += len(FunctionList) * 4
+    
+    if scena.ChipFrameInfoOffset == 0:
+        scena.ChipFrameInfoOffset = scena.ScenaFunctionTable.Offset
 
     for func in FunctionList:
         scena.DelayFixLabels.append(LabelEntry(func, scena.fs.tell()))

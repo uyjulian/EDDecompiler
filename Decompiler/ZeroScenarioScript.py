@@ -1019,7 +1019,7 @@ class ScenarioInfo:
         fs.seek(self.ChipFrameInfoOffset)
         self.ChipFrameInfo = []
         
-        while fs.tell() < min(self.ScenaFunctionTable.Offset, ChipFrameInfoLast):
+        while fs.tell() < self.ScenaFunctionTable.Offset:
             self.ChipFrameInfo.append(ScenarioChipFrameInfo(fs))
 
         fs.seek(self.StringTableOffset)
