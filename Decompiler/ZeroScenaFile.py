@@ -53,8 +53,16 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
     for i in range(len(IncludeList)):
         scena.IncludedScenario[i] = ScenarioFileIndex(IncludeList[i]).Index()
 
-    if len(sys.argv) > 1:
-        FileName = sys.argv[1] + '\\' + FileName
+    start_argv = 1
+    if sys.argv[1].startswith('--cp='):
+        cp = sys.argv[1][5:]
+        CODE_PAGE = cp
+        edao.CODE_PAGE = cp
+        edao.edao_op_table.CodePage = cp
+        start_argv = 2
+
+    if len(sys.argv) > start_argv:
+        FileName = sys.argv[start_argv] + '\\' + FileName
 
     scena.fs = fileio.FileStream(FileName, 'wb+')
     scena.fs.seek(0x94)

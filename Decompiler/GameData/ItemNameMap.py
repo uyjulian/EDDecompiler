@@ -5,6 +5,8 @@ from ml import *
 ItemNameMap = {}
 ItemTrueNameMap = {}
 
+
+'''
 ItemNameMap[0x0001] = "调查手册"
 ItemNameMap[0x0002] = "料理手册"
 ItemNameMap[0x0003] = "钓鱼手册"
@@ -1426,6 +1428,8 @@ ItemTrueNameMap[0x0657] = "神宠高跟鞋"
 ItemTrueNameMap[0x0658] = "金耀翔天鞋"
 ItemTrueNameMap[0x0659] = "银耀星影鞋"
 ItemTrueNameMap[0x065A] = "斯托雷加Ω"
+
+'''
 
 for id, name in ItemNameMap.items(): exec("%s = 0x%04X" % (name, id))
 

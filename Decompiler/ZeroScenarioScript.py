@@ -1251,6 +1251,10 @@ class ScenarioInfo:
         hdr = []
         hdr.append('from ZeroScenarioHelper import *')
         hdr.append('')
+        hdr.append('CODE_PAGE = "%s"'                           % CODE_PAGE)
+        hdr.append('edao.CODE_PAGE = "%s"'                      % CODE_PAGE)
+        hdr.append('edao.edao_op_table.CodePage = "%s"'         % CODE_PAGE)
+        hdr.append('')
         hdr.append('CreateScenaFile(')
         hdr.append('    "%s",                # FileName'        % filename)
         hdr.append('    "%s",                    # MapName'     % self.MapName)
@@ -1458,7 +1462,15 @@ def procfile(file):
 
 if __name__ == '__main__':
 #    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
-    files = iterlib.forEachGetFiles(sys.argv[1:], '*.bin')
+    start_argv = 1
+    if sys.argv[1].startswith('--cp='):
+        cp = sys.argv[1][5:]
+        CODE_PAGE = cp
+        edao.CODE_PAGE = cp
+        edao.edao_op_table.CodePage = cp
+        start_argv = 2
+
+    files = iterlib.forEachGetFiles(sys.argv[start_argv:], '*.bin')
 
     Log.OpenLog(sys.argv[1] + '\..\log.txt')
 
