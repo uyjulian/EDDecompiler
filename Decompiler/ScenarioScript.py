@@ -1248,6 +1248,8 @@ class ScenarioInfo:
         hdr = []
         hdr.append('from ScenarioHelper import *')
         hdr.append('')
+        hdr.append('SetCodePage("%s")'                          % CODE_PAGE)
+        hdr.append('')
         hdr.append('CODE_PAGE = "%s"'                           % CODE_PAGE)
         hdr.append('edao.CODE_PAGE = "%s"'                      % CODE_PAGE)
         hdr.append('edao.edao_op_table.CodePage = "%s"'         % CODE_PAGE)

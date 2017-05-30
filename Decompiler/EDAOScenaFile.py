@@ -27,6 +27,12 @@ class ScenarioInfoPort(ScenarioInfo):
 
 scena = ScenarioInfoPort()
 
+def SetCodePage(cp):
+    global CODE_PAGE
+    CODE_PAGE = cp
+    edao.CODE_PAGE = cp
+    edao.edao_op_table.CodePage = cp
+
 def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags, IncludeList, Unknown_4A, PreInitFunctionIndex, Unknown_51, InitData):
     scena.MapName               = MapName
     scena.Location              = Location
