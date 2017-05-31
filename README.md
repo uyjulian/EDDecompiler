@@ -8,6 +8,10 @@ Just give the usage here:
 
 ## 1. Install python3
 
+You must install the missing libs notified in step 3.   
+Most of them could be installed with pip command and they will work correctly, except one lib : aiohttp.  
+you must install aiohttp-1.2.0, since the lastest one is not suitable for this project.
+
 ## 2. clone **EDDecompiler** and **PyLibs**
 
 ```
