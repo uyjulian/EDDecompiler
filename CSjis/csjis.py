@@ -5,40 +5,50 @@ code_name = 'custom-sjis'
 sjis2ucs = [0] * 0x10000
 ucs2sjis = [0] * 0x10000
 
+def jis2sjis(jis):
+    sjis = jis
+
+    if sjis >= 0x100:
+        jis_h = jis >> 8
+        jis_l = jis & 0xFF
+
+        jis_h -= 0x21
+
+        jis_l += 0x7E if jis_h & 1 else 0x1F
+        jis_l += 1 if 0x7F <= jis_l <= 0x9D else 0
+
+        jis_h >>= 1
+        jis_h += 0x81 if jis_h <= 0x1E else 0xC1
+
+        sjis = jis_h << 8 | jis_l
+
+    return  sjis
 
 def init_map():
     dir_py = os.path.split(os.path.realpath(__file__))[0]
+
     path = dir_py + '/jis2ucs.bin'
     file = open(path, 'rb')
-
     for jis in range(len(sjis2ucs)):
         short = file.read(2)
         if not short:
             break
         ucs, = struct.unpack('<H', short)
-
         if ucs != 0:
-            sjis = jis
-
-            if sjis >= 0x100:
-                jis_h = jis >> 8
-                jis_l = jis & 0xFF
-
-                jis_h -= 0x21
-
-                jis_l += 0x7E if jis_h & 1 else 0x1F
-                jis_l += 1 if 0x7F <= jis_l <= 0x9D else 0
-
-                jis_h >>= 1
-                jis_h += 0x81 if jis_h <= 0x1E else 0xC1
-
-                sjis = jis_h << 8 | jis_l
-
+            sjis = jis2sjis(jis)
             sjis2ucs[sjis] = ucs
-            if ucs2sjis[ucs] == 0:
-                ucs2sjis[ucs] = sjis
-            else:
-                print("Duplicate %c(\\u%04X), sjis: %04X, %04X" % (chr(ucs), ucs, ucs2sjis[ucs], sjis))
+
+    path = dir_py + '/ucs2jis.bin'
+    file = open(path, 'rb')
+    for ucs in range(len(sjis2ucs)):
+        short = file.read(2)
+        if not short:
+            break
+        jis, = struct.unpack('<H', short)
+        if jis != 0:
+            sjis = jis2sjis(jis)
+            ucs2sjis[ucs] = sjis
+
     file.close()
 
 

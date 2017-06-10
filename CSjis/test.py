@@ -7,7 +7,7 @@ def main():
     ccode.register()
     code_name = ccode.get_name()
 
-    bs = 'XB木瀬\u0000間Sハル'.encode(code_name)
+    bs = '～XB木瀬\u0000間Sハル'.encode(code_name)
     str = bs.decode('shift-jis')
     str2 = bs.decode(code_name)
     print(str)
