@@ -2,6 +2,9 @@ from ZeroScenarioScript import *
 from Instruction.ScenaOpTableZero import *
 from GameData.ItemNameMap import *
 
+import importlib.machinery
+import os
+
 def plog(*value, sep = ' ', end = '\n', file = sys.stdout, flush = False):
     pass
 
@@ -60,12 +63,21 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
         scena.IncludedScenario[i] = ScenarioFileIndex(IncludeList[i]).Index()
 
     start_argv = 1
+    global CODE_PAGE
+    cp = CODE_PAGE
     if sys.argv[1].startswith('--cp='):
         cp = sys.argv[1][5:]
-        CODE_PAGE = cp
-        edao.CODE_PAGE = cp
-        edao.edao_op_table.CodePage = cp
         start_argv = 2
+    elif sys.argv[1].startswith('--cppy='):
+        cppy = os.path.abspath(sys.argv[1][7:])
+        ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+        ccode.register()
+        cp = ccode.get_name()
+        start_argv = 2
+
+    CODE_PAGE = cp
+    edao.CODE_PAGE = cp
+    edao.edao_op_table.CodePage = cp
 
     if len(sys.argv) > start_argv:
         FileName = sys.argv[start_argv] + '\\' + FileName

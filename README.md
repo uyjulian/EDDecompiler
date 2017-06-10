@@ -25,13 +25,13 @@ Assume the script files are in folders **scena**, then you can decompile them wi
 
 ```
     set PYTHONPATH=EDDecompiler/Decompiler;PyLibs
-    python3 EDDecompiler/Decompiler/ZeroScenarioScript.py --cp=ms932 scena 
+    python EDDecompiler/Decompiler/ZeroScenarioScript.py --cp=ms932 scena 
 ```
 
 If you are working with **_Ao no Kiseki_**, the second line should be:
 
 ```
-    python3 EDDecompiler/Decompiler/ScenarioScript.py --cp=ms932 scena
+    python EDDecompiler/Decompiler/ScenarioScript.py --cp=ms932 scena
 ```
 
 parameter **--cp=ms932** is set the codepage to ms932, default is gbk.
@@ -44,9 +44,15 @@ Assume you want to recompile **xxxx.py** to folder scena_new:
 
 ```
     set PYTHONPATH=EDDecompiler/Decompiler;PyLibs
-    python3 xxxx.py scena_new
+    python xxxx.py --cp=ms932 scena_new
 ```
 
 Then you will get **xxxx.bin** under scena_new
 
+## About Custom Encoding
 
+You can use "--cp={codepage}" to assign another codepage during decompiling and recompiling.
+
+Or use "--cppy={path of python script of encoding}" to assign a custom encoding.
+
+[csjis](https://github.com/ZhenjianYang/EDDecompiler/CSjis/scjis.py) is an example of custom encoding.

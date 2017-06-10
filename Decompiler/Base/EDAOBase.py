@@ -1,6 +1,6 @@
 from Base.BaseType import *
 
-CODE_PAGE = 'GBK'
+CODE_PAGE = 'NotSet'
 
 SEPITH_CHI  = 0
 SEPITH_MIZU = 1

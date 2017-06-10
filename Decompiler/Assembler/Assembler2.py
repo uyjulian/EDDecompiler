@@ -10,9 +10,10 @@ class Log:
         Log.flog.close()
 
 def plog(*args):
-    print(*args)
-    Log.flog.write(*args)
-    Log.flog.write('\n')
+    pass
+    #print(*args)
+    #Log.flog.write(*args)
+    #Log.flog.write('\n')
 
 #plog = print
 
