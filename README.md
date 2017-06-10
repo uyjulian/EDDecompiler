@@ -55,4 +55,4 @@ You can use "--cp={codepage}" to assign another codepage during decompiling and 
 
 Or use "--cppy={path of python script of encoding}" to assign a custom encoding.
 
-[csjis](https://github.com/ZhenjianYang/EDDecompiler/CSjis/scjis.py) is an example of custom encoding.
+[csjis](https://github.com/ZhenjianYang/EDDecompiler/blob/master/CSjis/csjis.py) is an example of custom encoding.
