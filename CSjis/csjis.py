@@ -37,7 +37,8 @@ def init_map():
         if ucs != 0:
             sjis = jis2sjis(jis)
             sjis2ucs[sjis] = ucs
-
+    file.close()
+    
     path = dir_py + '/ucs2jis.bin'
     file = open(path, 'rb')
     for ucs in range(len(sjis2ucs)):
@@ -48,7 +49,6 @@ def init_map():
         if jis != 0:
             sjis = jis2sjis(jis)
             ucs2sjis[ucs] = sjis
-
     file.close()
 
 
