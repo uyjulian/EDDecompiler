@@ -904,9 +904,9 @@ def main():
 
     os.chdir(os.path.dirname(__file__))
 
-    if not ExtractText:
-        textPosTable = json.load(open('fc_sn_text_final.json', 'r', encoding = 'utf-8-sig'))
-        replaceOption = json.load(open('replace_option.json', 'r', encoding = 'utf-8-sig'))
+    #if not ExtractText:
+    #    textPosTable = json.load(open('fc_sn_text_final.json', 'r', encoding = 'utf-8-sig'))
+    #    replaceOption = json.load(open('replace_option.json', 'r', encoding = 'utf-8-sig'))
 
     if len(sys.argv) == 1:
         sys.argv.append(r"T0001   ._SN")

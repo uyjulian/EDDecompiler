@@ -1,5 +1,5 @@
-from Assembler.Assembler2 import *
-from Base.EDAOBase import *
+from Assembler.Assembler2s import *
+from Base.EDAOSNBase import *
 import Instruction.ScenaOpTableEDAO as edao
 
 import importlib.machinery
