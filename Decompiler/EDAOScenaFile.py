@@ -2,6 +2,9 @@ from ScenarioScript import *
 from Instruction.ScenaOpTableEDAO import *
 from GameData.ItemNameMap import *
 
+import importlib.machinery
+import os
+
 def plog(*value, sep = ' ', end = '\n', file = sys.stdout, flush = False):
     pass
 
@@ -23,8 +26,15 @@ class ScenarioInfoPort(ScenarioInfo):
         self.PrevousHandlerData = None
 
         self.ScpFunctionList    = []
+        self.Labels['loc_FFFFABCD'] = 0xFFFFABCD
 
 scena = ScenarioInfoPort()
+
+def SetCodePage(cp):
+    global CODE_PAGE
+    CODE_PAGE = cp
+    edao.CODE_PAGE = cp
+    edao.edao_op_table.CodePage = cp
 
 def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags, IncludeList, Unknown_4A, PreInitFunctionIndex, Unknown_51, InitData):
     scena.MapName               = MapName
@@ -52,6 +62,26 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
 
     for i in range(len(IncludeList)):
         scena.IncludedScenario[i] = ScenarioFileIndex(IncludeList[i]).Index()
+
+    start_argv = 1
+    global CODE_PAGE
+    cp = CODE_PAGE
+    if sys.argv[1].startswith('--cp='):
+        cp = sys.argv[1][5:]
+        start_argv = 2
+    elif sys.argv[1].startswith('--cppy='):
+        cppy = os.path.abspath(sys.argv[1][7:])
+        ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+        ccode.register()
+        cp = ccode.get_name()
+        start_argv = 2
+
+    CODE_PAGE = cp
+    edao.CODE_PAGE = cp
+    edao.edao_op_table.CodePage = cp
+
+    if len(sys.argv) > start_argv:
+        FileName = sys.argv[start_argv] + '\\' + FileName
 
     scena.fs = fileio.FileStream(FileName, 'wb+')
     scena.fs.seek(0x94)
@@ -421,6 +451,7 @@ def scpstr(ctrlcode, value = None):
         SCPSTR_CODE_COLOR       : lambda : '\\x%02X\\x%02X' % (ctrlcode, value),
         SCPSTR_CODE_LINE_FEED   : lambda : '\\x%02X' % (ctrlcode),
         0x0A                    : lambda : '\\x%02X' % (ctrlcode),
+        0x0D                    : lambda : '\\x%02X' % (ctrlcode),
         SCPSTR_CODE_ENTER       : lambda : '\\x%02X' % (ctrlcode),
         SCPSTR_CODE_CLEAR       : lambda : '\\x%02X' % (ctrlcode),
         0x04                    : lambda : '\\x%02X' % (ctrlcode),
@@ -468,7 +499,7 @@ def SaveToFile():
 
     fs.seek(0)
     fs.write(scena.binary())
-
+    fs.close()
     print('done')
 
     #input()

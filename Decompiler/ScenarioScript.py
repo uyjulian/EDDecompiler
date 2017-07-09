@@ -2,7 +2,8 @@ from Assembler.Assembler2 import *
 from Base.EDAOBase import *
 import Instruction.ScenaOpTableEDAO as edao
 
-CODE_PAGE = edao.CODE_PAGE
+import importlib.machinery
+import os
 
 '''
 
@@ -441,7 +442,7 @@ class ScenarioBattleInfo:
         pos = fs.tell()
 
         fs.seek(self.BattleMapOffset)
-        self.BattleMap = fs.ReadMultiByte(CODE_PAGE)
+        self.BattleMap = fs.ReadMultiByte(edao.CODE_PAGE)
 
         self.Sepith = None
         if self.SepithOffset != 0:
@@ -720,7 +721,7 @@ class ScenarioPlaceNameInfo:
         pos = fs.tell()
         fs.seek(self.NameOffset)
 
-        self.Name = fs.ReadMultiByte(CODE_PAGE)
+        self.Name = fs.ReadMultiByte(edao.CODE_PAGE)
 
         fs.seek(pos)
 
@@ -867,13 +868,13 @@ class ScenarioInfo:
             #self.ScnInfoNumber.append(0)
 
     def binary(self):
-        MapName = self.MapName.encode(CODE_PAGE)
+        MapName = self.MapName.encode(edao.CODE_PAGE)
         if len(MapName) < 0xA:
             MapName += b'\x00' * (0xA - len(MapName))
         elif len(MapName) > 0xA:
             MapName = MapName[:0xA]
 
-        Location = self.Location.encode(CODE_PAGE)
+        Location = self.Location.encode(edao.CODE_PAGE)
         if len(Location) < 0xA:
             Location += b'\x00' * (0xA - len(Location))
         elif len(Location) > 0xA:
@@ -929,8 +930,8 @@ class ScenarioInfo:
 
         # file header
 
-        self.MapName                    = fs.read(0xA).decode(CODE_PAGE).split('\x00', 1)[0]
-        self.Location                   = fs.read(0xA).decode(CODE_PAGE).split('\x00', 1)[0]
+        self.MapName                    = fs.read(0xA).decode(edao.CODE_PAGE).split('\x00', 1)[0]
+        self.Location                   = fs.read(0xA).decode(edao.CODE_PAGE).split('\x00', 1)[0]
         self.MapIndex                   = fs.ReadUShort()
         self.MapDefaultBGM              = BGMFileIndex(fs.ReadShort())
         self.Flags                      = fs.ReadULong()
@@ -975,7 +976,7 @@ class ScenarioInfo:
 
             for offset in offsetlist:
                 town.seek(offset)
-                self.MapNameList.append(town.ReadMultiByte(CODE_PAGE))
+                self.MapNameList.append(town.ReadMultiByte(edao.CODE_PAGE))
 
         except:
             self.MapNameList = []
@@ -1028,7 +1029,7 @@ class ScenarioInfo:
         if endmz != -1:
             buf = buf[:endmz]
 
-        stringtable = buf.decode(CODE_PAGE).rstrip('\x00').split('\x00')
+        stringtable = buf.decode(edao.CODE_PAGE).rstrip('\x00').split('\x00')
         for string in stringtable:
             #if string in self.StringTable: continue
             self.StringTable.append(string)
@@ -1248,6 +1249,9 @@ class ScenarioInfo:
         hdr = []
         hdr.append('from ScenarioHelper import *')
         hdr.append('')
+        hdr.append('SetCodePage("%s")'                          % edao.CODE_PAGE)
+
+        hdr.append('')
         hdr.append('CreateScenaFile(')
         hdr.append('    "%s",                # FileName'        % filename)
         hdr.append('    "%s",                    # MapName'     % self.MapName)
@@ -1451,4 +1455,29 @@ def procfile(file):
     scena.SaveToFile(file + '.py')
 
 if __name__ == '__main__':
-    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
+#    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
+    cp = 'gbk'
+    start_argv = 1
+    if sys.argv[1].startswith('--cp='):
+        cp = sys.argv[1][5:]
+        start_argv = 2
+    elif sys.argv[1].startswith('--cppy='):
+        cppy = os.path.abspath(sys.argv[1][7:])
+        ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+        ccode.register()
+        cp = ccode.get_name()
+        start_argv = 2
+
+    edao.CODE_PAGE = cp
+    edao.edao_op_table.CodePage = cp
+
+    files = iterlib.forEachGetFiles(sys.argv[start_argv:], '*.bin')
+
+    #Log.OpenLog(sys.argv[start_argv] + '\..\log.txt')
+
+    for file in files:
+        plog('START %s' % file)
+        procfile(file)
+        plog('FINISHED %s' % file)
+
+    #Log.CloseLog()

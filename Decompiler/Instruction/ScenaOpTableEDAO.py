@@ -246,10 +246,12 @@ for op, name in InstructionNames.items():
 
 
 def GetItemName(id):
-    return ItemNameMap[id] if id in ItemNameMap else '0x%X' % id
+    return '0x%X' % id
+    #return ItemNameMap[id] if id in ItemNameMap else '0x%X' % id
 
 def GetItemTrueName(id):
-    return '\'%s\'' % ItemTrueNameMap[id] if id in ItemTrueNameMap else '0x%X' % id
+    return '0x%X' % id
+    #return '\'%s\'' % ItemTrueNameMap[id] if id in ItemTrueNameMap else '0x%X' % id
 
 
 ScpStrCodeMap = {}
@@ -1509,7 +1511,8 @@ def scp_set_scenario_flags(data):
         if len(data.Arguments) == 2:
             offset, bit = data.Arguments[0], data.Arguments[1]
             if offset >= 0x220:
-                raise Exception('offset must be less than 0x220')
+                pass
+                #raise Exception('offset must be less than 0x220')
 
             data.Arguments = [MakeScenarioFlags(offset, bit)]
 
