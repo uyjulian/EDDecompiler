@@ -12,6 +12,13 @@ You must install the missing libs notified in step 3.
 Most of them could be installed with pip command and they will work correctly, except one lib : aiohttp.  
 you must install aiohttp-1.2.0, since the lastest one is not suitable for this project.
 
+```
+pip3 install xmltodict
+pip3 install aiohttp==1.2.0
+pip3 install rsa
+pip3 install hexdump
+```
+
 ## 2. clone **EDDecompiler** and **PyLibs**
 
 ```
