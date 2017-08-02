@@ -1,19 +1,8 @@
 from Base.BaseType import *
 from Assembler.InstructionTable import *
 
-class Log:
-    flog = sys.stdout
-
-    def OpenLog(path = 'log.txt'):
-        Log.flog = open(path, 'w')
-    def CloseLog():
-        Log.flog.close()
-
 def plog(*args):
     pass
-    #print(*args)
-    #Log.flog.write(*args)
-    #Log.flog.write('\n')
 
 #plog = print
 
@@ -81,7 +70,7 @@ class Disassembler:
             data.GlobalLabelTable = self.GlobalLabelTable
 
         data.Block = CodeBlock(data.Stream.tell())
-        
+
         self.DisasmBlockWorker(disasmdata)
 
         return disasmdata.Block
@@ -182,7 +171,7 @@ class Disassembler:
             pos = Stream.tell()
             if pos in DisasmTable: break
             if pos >= endofblock: break
-            
+
             #offsetlist[pos] = True
 
             handlerdata                     = HandlerData(HANDLER_REASON_DISASM)
@@ -309,7 +298,7 @@ class Disassembler:
             text = self.DefaultFormatInstruction(data)
 
         if self.HandleInstructionCallback:
-            symbol = self.HandleInstructionCallback(data,text)
+            symbol = self.HandleInstructionCallback(data)
             text = symbol if symbol else text
 
         return text
