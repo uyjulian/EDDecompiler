@@ -309,7 +309,7 @@ class Disassembler:
             text = self.DefaultFormatInstruction(data)
 
         if self.HandleInstructionCallback:
-            symbol = self.HandleInstructionCallback(data,text)
+            symbol = self.HandleInstructionCallback(data)
             text = symbol if symbol else text
 
         return text
