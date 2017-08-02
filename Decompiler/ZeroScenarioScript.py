@@ -1,4 +1,4 @@
-from Assembler.Assembler2s import *
+from Assembler.Assembler2 import *
 from Base.ZeroBase import *
 import Instruction.ScenaOpTableZero as edao
 
