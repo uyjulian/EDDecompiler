@@ -1,6 +1,6 @@
 # EDDecompiler
 
-This projcet is forked from [Ouroboros/EDDecompiler](https://github.com/Ouroboros/EDDecompiler) and merged with [ZhenjianYang/EDDecompiler](https://github.com/ZhenjianYang/EDDecompiler)
+This projcet is forked from [Ouroboros/EDDecompiler](https://github.com/Ouroboros/EDDecompiler) and merged with [illidan2004/EDDecompiler](https://github.com/illidan2004/EDDecompiler)
 
 It can be used to decompile/recompile script files of PSP & PC games *Zero/Ao no Kiseki* and Steam game *Sora no Kiseki FC HD*
 
@@ -22,8 +22,8 @@ you must install aiohttp-1.2.0, since the lastest one is not suitable for this p
 ## 2. clone **EDDecompiler** and **PyLibs**
 
 ```
-    git clone https://github.com/illidan2004/EDDecompiler   
-    git clone https://github.com/illidan2004/PyLibs   
+    git clone https://github.com/ZhenjianYang/EDDecompiler   
+    git clone https://github.com/ZhenjianYang/PyLibs   
 ```
 
 ## 3. Decompile
@@ -70,4 +70,4 @@ You can use "--cp={codepage}" to assign another codepage during decompiling and 
 
 Or use "--cppy={path of python script of encoding}" to assign a custom encoding.
 
-[csjis](https://github.com/illidan2004/EDDecompiler/blob/master/CSjis/csjis.py) is an example of custom encoding.
+[csjis](https://github.com/ZhenjianYang/EDDecompiler/blob/master/CSjis/csjis.py) is an example of custom encoding.
