@@ -6,21 +6,14 @@ It can be used to decompile/recompile script files of PSP & PC games *Zero/Ao no
 
 Just give the usage here:
 
-## 1. Install python3
-
-You must install the missing libs notified in step 3.   
-Most of them could be installed with pip command and they will work correctly, except one lib : aiohttp.  
-you must install aiohttp-1.2.0, since the lastest one is not suitable for this project.
-
+## 1. Install python3   
+And install missing libs with this command:   
 ```
-    pip3 install xmltodict
-    pip3 install aiohttp==1.2.0
-    pip3 install rsa
-    pip3 install hexdump
+    pip3 install xmltodict aiohttp==1.2.0 rsa hexdump
 ```
+**NOTE:** You must install aiohttp-1.2.0, since the lastest version is not suitable for this project.
 
-## 2. clone **EDDecompiler** and **PyLibs**
-
+## 2. clone **EDDecompiler** and **PyLibs**   
 ```
     git clone https://github.com/ZhenjianYang/EDDecompiler   
     git clone https://github.com/ZhenjianYang/PyLibs   
@@ -46,7 +39,7 @@ parameter **--cp=ms932** is set the codepage to ms932, default is gbk.
 Then you will get decompiled script files **xxxx.py** (xxxx stands for the script's name) under folder scena.
 
 If you are working with **_Sora no Kiseki FC HD_**, replace **GAME_PATH** with your <**Trails in the Sky Path**> in EDDecompiler/Decompiler/Base/ED6FCBase.py, 
-and extract ED6_DT01.dat with **falcncvt tool** or use the Chinese scenario scripts from [Ouroboros/ED6-FC-Steam-CN](https://github.com/Ouroboros/ED6-FC-Steam-CN), 
+and extract ED6_DT01.dat with [**falcncvt tool**](http://www.pokanchan.jp/dokuwiki/software/falcnvrt/start) or use the Chinese scenario scripts from [Ouroboros/ED6-FC-Steam-CN](https://github.com/Ouroboros/ED6-FC-Steam-CN), 
 then use the following command line to decompile:
 
 ```
@@ -70,4 +63,5 @@ You can use "--cp={codepage}" to assign another codepage during decompiling and 
 
 Or use "--cppy={path of python script of encoding}" to assign a custom encoding.
 
-[csjis](https://github.com/ZhenjianYang/EDDecompiler/blob/master/CSjis/csjis.py) is an example of custom encoding.
+[csjis](https://github.com/ZhenjianYang/EDDecompiler/blob/master/CSjis/csjis.py) is a custom
+Shift-JIS encoding, which is defined by **jis2ucs.bin** and **ucs2jis.bin**.
