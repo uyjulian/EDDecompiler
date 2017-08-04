@@ -75,6 +75,8 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
         cp = ccode.get_name()
         start_argv = 2
 
+    if cp == 'NotSet':
+        cp = 'gbk'
     CODE_PAGE = cp
     edao.CODE_PAGE = cp
     edao.edao_op_table.CodePage = cp
