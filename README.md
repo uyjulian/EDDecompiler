@@ -63,5 +63,5 @@ You can use "--cp={codepage}" to assign another codepage during decompiling and 
 
 Or use "--cppy={path of python script of encoding}" to assign a custom encoding.
 
-[csjis](https://github.com/ZhenjianYang/EDDecompiler/blob/master/CSjis/csjis.py) is a custom
-Shift-JIS encoding, which is defined by **jis2ucs.bin** and **ucs2jis.bin**.
+[CSjis](https://github.com/ZhenjianYang/CSjis) is a custom Shift-JIS encoding,
+which is defined by **jis2ucs.bin** and **ucs2jis.bin**.
