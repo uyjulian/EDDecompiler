@@ -964,6 +964,40 @@ def scp_battle(data):
         BattleInfoOffset = data.Arguments[0]
         ins.OperandFormat = operand_with_battle_info if type(BattleInfoOffset) == str else operand_without_battle_info
 
+def scp_16(data):
+    def getopr(opr1):
+        operand = ''
+
+        if opr1 == 2:
+            operand = 'IIIHHI'
+        elif opr1 == 3:
+            operand = 'BB'
+
+        return operand
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr1 = fs.ReadByte()
+
+        ins.Operand.append(opr1)
+
+        operand = getopr(opr1)
+
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        ins.OperandFormat = 'B' + operand
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+        operand = getopr(opr1)
+
+        data.Instruction.OperandFormat = 'B' + operand
 
 # SetBarrier(op_0, id, type, 0, x, z, y, cx, cy, degree * 1000)
 # op: 0 = create
@@ -1669,7 +1703,7 @@ edao_op_list = \
     inst(OP_13,                     'W'),   # poswnd
     inst(BlurSwitch,                'LLLBL'),
     inst(CancelBlur,                'I'),
-    inst(OP_16,                     'BBBB'),
+    inst(OP_16,                     NO_OPERAND,             0,                          scp_16),    # see scp_16
     inst(ShowSaveMenu),
     inst(EventBegin,                'B'),
     inst(EventEnd,                  'B'),
