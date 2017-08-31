@@ -65,10 +65,10 @@ def CreateScenaFile(FileName, MapName, Location, MapIndex, MapDefaultBGM, Flags,
     start_argv = 1
     global CODE_PAGE
     cp = CODE_PAGE
-    if sys.argv[1].startswith('--cp='):
+    if len(sys.argv) > 1 and sys.argv[1].startswith('--cp='):
         cp = sys.argv[1][5:]
         start_argv = 2
-    elif sys.argv[1].startswith('--cppy='):
+    elif len(sys.argv) > 1 and sys.argv[1].startswith('--cppy='):
         cppy = os.path.abspath(sys.argv[1][7:])
         ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
         ccode.register()

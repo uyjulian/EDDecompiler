@@ -1463,10 +1463,10 @@ if __name__ == '__main__':
 #    iterlib.forEachFileMP(procfile, sys.argv[1:], '*.bin')
     cp = 'gbk'
     start_argv = 1
-    if sys.argv[1].startswith('--cp='):
+    if len(sys.argv) > 1 and sys.argv[1].startswith('--cp='):
         cp = sys.argv[1][5:]
         start_argv = 2
-    elif sys.argv[1].startswith('--cppy='):
+    elif len(sys.argv) > 1 and sys.argv[1].startswith('--cppy='):
         cppy = os.path.abspath(sys.argv[1][7:])
         ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
         ccode.register()
@@ -1476,7 +1476,7 @@ if __name__ == '__main__':
     edao.CODE_PAGE = cp
     edao.edao_op_table.CodePage = cp
 
-    files = iterlib.forEachGetFiles(sys.argv[start_argv:], '*.bin')
+    files = [] if len(sys.argv) <= start_argv else iterlib.forEachGetFiles(sys.argv[start_argv:], '*.bin')
 
     #Log.OpenLog(sys.argv[start_argv] + '\..\log.txt')
 

@@ -971,7 +971,7 @@ def scp_16(data):
         if opr1 == 2:
             operand = 'IIIHHI'
         elif opr1 == 3:
-            operand = 'BB'
+            operand = 'BBB'
 
         return operand
 
