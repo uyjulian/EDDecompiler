@@ -927,7 +927,7 @@ def main():
         elif sys.argv[i].startswith('--gp='):
             gp = os.path.abspath(sys.argv[i][5:])
         elif sys.argv[i] == '--append_place_name=True' or sys.argv[i] == '--append_place_name=true':
-            append_place_name = true
+            append_place_name = True
         else:
             files.extend(iterlib.forEachGetFiles(sys.argv[i], '*._SN'))
 
