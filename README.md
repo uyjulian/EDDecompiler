@@ -40,7 +40,7 @@ Scripts of *Zero no Kiseki*/*Ao no Kiseki* are **\.bin** files in `<game folder>
 For *Trails in the Sky FC*, they are **\.\_SN** files extracted from **ED6_DT01.dat** with tool [**falcncvt tool**](http://www.pokanchan.jp/dokuwiki/software/falcnvrt/start). 
 
 Parameter **--cp=\<codepage\>** is setting the codepage, default is gbk.   
-**NOTE**: The codepage of the *Trails in the Sky FC* (English) is **ms932**, **NOT** ASCII.
+**NOTE**: The codepage of *Trails in the Sky FC* (English version) is **ms932**, **NOT** ASCII.
 
 Decompiled scripts will have a filename like **xxxx.py** (xxxx stands for the script's name).
 
