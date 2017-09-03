@@ -15,8 +15,8 @@ And install missing libs with this command:
 
 ## 2. clone **EDDecompiler** and **PyLibs**   
 ```
-    git clone https://github.com/ZhenjianYang/EDDecompiler   
-    git clone https://github.com/ZhenjianYang/PyLibs   
+    git clone https://github.com/illidan2004/EDDecompiler   
+    git clone https://github.com/illidan2004/PyLibs   
 ```
 
 ## 3. Decompile
