@@ -26,6 +26,13 @@ class ScenarioInfoPort(ScenarioInfo):
 
 scena = None
 
+def SetCodePage(cp):
+    global CODE_PAGE
+    CODE_PAGE = cp
+    ed6fc.CODE_PAGE = cp
+    ed6fc.ed6fc_op_table.CodePage = cp
+    setCodePage(cp);
+
 def CreateScenaFile(
         FileName,
         MapName,
@@ -37,6 +44,46 @@ def CreateScenaFile(
         Reserved,
         IncludedScenario,
     ):
+    global CODE_PAGE
+    global GAME_PATH
+    cp = CODE_PAGE
+    gp = GAME_PATH
+    fullFileName = ''
+    i = 1
+
+    while i < len(sys.argv):
+        if sys.argv[i].startswith('--cp='):
+            cp = sys.argv[i][5:]
+        elif sys.argv[i].startswith('--cppy='):
+            cppy = os.path.abspath(sys.argv[i][7:])
+            ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+            ccode.register()
+            cp = ccode.get_name()
+        elif sys.argv[i].startswith('--gp='):
+            gp = os.path.abspath(sys.argv[i][5:])
+        else:
+            fullFileName = sys.argv[i]
+
+        i += 1
+
+    if cp == 'NotSet':
+        cp = 'gbk'
+    if gp == 'NotSet':
+        gp = r'D:\Steam\steamapps\common\Trails in the Sky FC'
+
+    CODE_PAGE = cp
+    ed6fc.CODE_PAGE = cp
+    ed6fc.ed6fc_op_table.CodePage = cp
+    setCodePage(cp);
+
+    GAME_PATH = gp
+    setGamePath(gp)
+    initDatFileNameTable(GAME_PATH)
+
+    if len(fullFileName) > 0:
+        fullFileName += '/' + FileName
+    else:
+        fullFileName = FileName
 
     global scena
 
@@ -58,7 +105,7 @@ def CreateScenaFile(
 
     scena.IncludedScenario = [ScenarioFileIndex(scp).Index() for scp in IncludedScenario]
 
-    scena.fs = fileio.FileStream(FileName, 'wb+')
+    scena.fs = fileio.FileStream(fullFileName, 'wb+')
     scena.fs.seek(0x64)
 
     updateScnInfoOffset(-1)

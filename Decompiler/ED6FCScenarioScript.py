@@ -4,7 +4,7 @@ import Instruction.ScenaOpTableED6FC as ed6fc
 
 ExtractText = not True
 # ed6fc.CODE_PAGE = '932'
-CODE_PAGE = ed6fc.CODE_PAGE
+# CODE_PAGE = ed6fc.CODE_PAGE
 
 NUMBER_OF_INCLUDE_FILE  = 8
 
@@ -374,8 +374,8 @@ class ScenarioInfo:
     def binary(self):
         buffer = fileio.FileStream(b'')
 
-        buffer.Write(self.MapName.encode(CODE_PAGE).ljust(0xA, b'\x00')[:0xA])
-        buffer.Write(self.Location.encode(CODE_PAGE).ljust(0xE, b'\x00')[:0xE])
+        buffer.Write(self.MapName.encode(ed6fc.CODE_PAGE).ljust(0xA, b'\x00')[:0xA])
+        buffer.Write(self.Location.encode(ed6fc.CODE_PAGE).ljust(0xE, b'\x00')[:0xE])
         buffer.WriteUShort(self.MapIndex)
         buffer.WriteUShort(self.MapDefaultBGM.Index())
         buffer.WriteUShort(self.Flags)
@@ -412,8 +412,8 @@ class ScenarioInfo:
 
         # file header
 
-        self.MapName            = fs.read(0xA).decode(CODE_PAGE).split('\x00', 1)[0]
-        self.Location           = fs.read(0xE).decode(CODE_PAGE).split('\x00', 1)[0]
+        self.MapName            = fs.read(0xA).decode(ed6fc.CODE_PAGE).split('\x00', 1)[0]
+        self.Location           = fs.read(0xE).decode(ed6fc.CODE_PAGE).split('\x00', 1)[0]
         self.MapIndex           = fs.ReadUShort()
         self.MapDefaultBGM      = BGMFileIndex(fs.ReadUShort())
         self.Flags              = fs.ReadUShort()
@@ -501,7 +501,7 @@ class ScenarioInfo:
         if endmz != -1:
             buf = buf[:endmz]
 
-        self.StringTable = buf.decode(CODE_PAGE).rstrip('\x00').split('\x00')
+        self.StringTable = buf.decode(ed6fc.CODE_PAGE).rstrip('\x00').split('\x00')
 
         if ExtractText:
             textPosTable[self.scenaName] = [self.StringTable]
@@ -700,6 +700,8 @@ class ScenarioInfo:
         hdr = []
         hdr.append('from ED6ScenarioHelper import *')
         hdr.append('')
+        hdr.append('SetCodePage("%s")'                          % ed6fc.CODE_PAGE)
+        hdr.append('')
 
         if mapname:
             hdr.append('# ' + mapname)
@@ -892,25 +894,62 @@ class ScenarioInfo:
         return '\r\n'.join(info)
 
 
-def procfile(file):
+def procfile(file, append_place_name = True):
     console.setTitle(os.path.basename(file))
     print('disasm %s' % file)
     scena = ScenarioInfo()
     if scena.open(file) is not False:
-        scena.SaveToFile(os.path.splitext(file)[0] + '.py')
+        scena.SaveToFile(os.path.splitext(file)[0] + '.py', append_place_name)
 
 def main():
     global textPosTable, replaceOption
 
-    os.chdir(os.path.dirname(__file__))
+    #os.chdir(os.path.dirname(__file__))
 
     #if not ExtractText:
     #    textPosTable = json.load(open('fc_sn_text_final.json', 'r', encoding = 'utf-8-sig'))
     #    replaceOption = json.load(open('replace_option.json', 'r', encoding = 'utf-8-sig'))
 
-    if len(sys.argv) == 1:
-        sys.argv.append(r"T0001   ._SN")
-    iterlib.forEachFile(procfile, sys.argv[1:], '*._SN')
+    cp = 'gbk'
+    gp = r'D:\Steam\steamapps\common\Trails in the Sky FC'
+    files = []
+    i = 1
+    append_place_name = False
+
+    while i < len(sys.argv):
+        if sys.argv[i].startswith('--cp='):
+            cp = sys.argv[i][5:]
+        elif sys.argv[i].startswith('--cppy='):
+            cppy = os.path.abspath(sys.argv[i][7:])
+            ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+            ccode.register()
+            cp = ccode.get_name()
+        elif sys.argv[i].startswith('--gp='):
+            gp = os.path.abspath(sys.argv[i][5:])
+        elif sys.argv[i] == '--append_place_name=True' or sys.argv[i] == '--append_place_name=true':
+            append_place_name = true
+        else:
+            files.extend(iterlib.forEachGetFiles(sys.argv[i], '*._SN'))
+
+        i += 1
+
+    global CODE_PAGE
+    CODE_PAGE = cp
+    ed6fc.CODE_PAGE = cp
+    ed6fc.ed6fc_op_table.CodePage = cp
+    setCodePage(cp);
+
+    global GAME_PATH
+    GAME_PATH = gp
+    setGamePath(gp)
+    initDatFileNameTable(GAME_PATH)
+    
+    #Log.OpenLog(sys.argv[start_argv] + '\..\log.txt')
+
+    for file in files:
+        plog('START %s' % file)
+        procfile(file, append_place_name)
+        plog('FINISHED %s' % file)
 
     if ExtractText:
         open('fc_sn_text.json', 'wb').write(json.dumps(textPosTable, indent = 2, ensure_ascii = False).encode('utf_8_sig'))
