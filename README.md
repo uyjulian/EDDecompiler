@@ -1,6 +1,6 @@
 # EDDecompiler
 
-This projcet is forked from [Ouroboros/EDDecompiler](https://github.com/Ouroboros/EDDecompiler) and merged with [illidan2004/EDDecompiler](https://github.com/illidan2004/EDDecompiler)
+This projcet is forked from [Ouroboros/EDDecompiler](https://github.com/Ouroboros/EDDecompiler) and merged with [ZhenjianYang/EDDecompiler](https://github.com/ZhenjianYang/EDDecompiler)
 
 It can be used to decompile/recompile script files of PSP & PC games *Zero/Ao no Kiseki* and Steam game *Sora no Kiseki FC HD*
 
