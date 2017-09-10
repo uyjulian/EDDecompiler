@@ -612,6 +612,7 @@ class ScenarioInfo:
         blockoffsetmap = {}
         for func in self.ScenaFunctions:
             index += 1
+            plog('Function_%d_%X' % (index, func))
             if func in blockoffsetmap:
                 codeblocks.append(blockoffsetmap[func])
                 continue

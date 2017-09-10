@@ -63,7 +63,7 @@ class FileIndexBase:
                 self.FileName = ''
                 return
 
-            dat = 'ED6_DT%02d' % (param >> 16)
+            dat = 'ED6_DT%02X' % (param >> 16)
             self.FileName = '%s/%s' % (dat, DatFileNameTable[dat][param & 0xFFFF])
 
         elif isinstance(param, str):
