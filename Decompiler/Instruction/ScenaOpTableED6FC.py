@@ -209,10 +209,12 @@ for op, name in InstructionNames.items():
 
 
 def GetItemName(id):
-    return ItemNameMap[id] if id in ItemNameMap else '0x%X' % id
+    return '0x%X' % id
+    #return ItemNameMap[id] if id in ItemNameMap else '0x%X' % id
 
 def GetItemDisplayName(id):
-    return '\'%s\'' % ItemTrueNameMap[id] if id in ItemTrueNameMap else '0x%X' % id
+    return '0x%X' % id
+    #return '\'%s\'' % ItemTrueNameMap[id] if id in ItemTrueNameMap else '0x%X' % id
 
 
 ScpStrCodeMap = {}

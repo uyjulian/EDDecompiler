@@ -1,8 +1,9 @@
 from Base.BaseType import *
 
-CODE_PAGE = 'GBK'
+CODE_PAGE = 'NotSet'
 
-GAME_PATH = r'E:\Game\SteamApps\steamapps\common\Trails in the Sky FC'
+#GAME_PATH = r'D:\Steam\steamapps\common\Trails in the Sky FC'
+GAME_PATH = 'NotSet'
 
 SEPITH_CHI  = 0
 SEPITH_MIZU = 1
@@ -17,6 +18,14 @@ CHIP_TYPE_APL       = 8
 CHIP_TYPE_MONSTER   = 9
 
 DatFileNameTable = CaseInsensitiveDict()
+
+def setCodePage(code_page):
+    global CODE_PAGE
+    CODE_PAGE = code_page
+
+def setGamePath(game_path):
+    global GAME_PATH
+    GAME_PATH = game_path
 
 def initDatFileNameTable(gamePath):
     if not os.path.exists(gamePath):
@@ -40,7 +49,7 @@ def initDatFileNameTable(gamePath):
 
         DatFileNameTable[file] = names
 
-initDatFileNameTable(GAME_PATH)
+#initDatFileNameTable(GAME_PATH)
 
 class FileIndexBase:
     def __init__(self, param):
@@ -54,7 +63,7 @@ class FileIndexBase:
                 self.FileName = ''
                 return
 
-            dat = 'ED6_DT%02d' % (param >> 16)
+            dat = 'ED6_DT%02X' % (param >> 16)
             self.FileName = '%s/%s' % (dat, DatFileNameTable[dat][param & 0xFFFF])
 
         elif isinstance(param, str):
