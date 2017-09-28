@@ -354,11 +354,23 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
 
         def encode(str):
             ret = bytearray()
-            for ch in str:
-                if ord(ch) < 0x100:
-                    ret.append(ord(ch))
+            i = 0
+            while i < len(str):
+                if ord(str[i]) == SCPSTR_CODE_ITEM:
+                    ret.append(ord(str[i]))
+                    ret.append(ord(str[i+1]))
+                    ret.append(ord(str[i+2]))
+                    i += 3
+                elif ord(str[i]) == SCPSTR_CODE_COLOR:
+                    ret.append(ord(str[i]))
+                    ret.append(ord(str[i+1]))
+                    i += 2
+                elif ord(str[i]) < 0x20:
+                    ret.append(ord(str[i]))
+                    i += 1
                 else:
-                    ret.extend(ch.encode(CODE_PAGE))
+                    ret.extend(str[i].encode(CODE_PAGE))
+                    i += 1
             return bytes(ret)
 
         def wexpr(value):
