@@ -398,6 +398,15 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
 
         fs = data.FileStream
         labels = data.Instruction.Labels
+        
+        def encode(str):
+            ret = bytearray()
+            for ch in str:
+                if ord(ch) < 0x100:
+                    ret.append(ord(ch))
+                else:
+                    ret.extend(ch.encode(CODE_PAGE))
+            return bytes(ret)
 
         def wexpr(value):
             for expr in value:
@@ -405,7 +414,7 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
 
         def wstr(value, recursion = False):
             if type(value) == str:
-                value = value.encode(CODE_PAGE)
+                value = encode(value)
                 if not recursion:
                     value += b'\x00'
 
