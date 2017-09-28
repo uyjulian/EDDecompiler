@@ -352,7 +352,7 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
         fs = data.FileStream
         labels = data.Instruction.Labels
 
-        def encode(str):
+        def enc_str(str):
             ret = bytearray()
             i = 0
             while i < len(str):
@@ -379,7 +379,7 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
 
         def wstr(value, recursion = False):
             if type(value) == str:
-                value = encode(value)
+                value = enc_str(value)
                 if not recursion:
                     value += b'\x00'
 
