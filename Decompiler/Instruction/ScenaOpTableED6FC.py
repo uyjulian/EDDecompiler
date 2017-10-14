@@ -352,13 +352,34 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
         fs = data.FileStream
         labels = data.Instruction.Labels
 
+        def enc_str(str):
+            ret = bytearray()
+            i = 0
+            while i < len(str):
+                if ord(str[i]) == SCPSTR_CODE_ITEM:
+                    ret.append(ord(str[i]))
+                    ret.append(ord(str[i+1]))
+                    ret.append(ord(str[i+2]))
+                    i += 3
+                elif ord(str[i]) == SCPSTR_CODE_COLOR:
+                    ret.append(ord(str[i]))
+                    ret.append(ord(str[i+1]))
+                    i += 2
+                elif ord(str[i]) < 0x20:
+                    ret.append(ord(str[i]))
+                    i += 1
+                else:
+                    ret.extend(str[i].encode(CODE_PAGE))
+                    i += 1
+            return bytes(ret)
+
         def wexpr(value):
             for expr in value:
                 expr.WriteExpression(data)
 
         def wstr(value, recursion = False):
             if type(value) == str:
-                value = value.encode(CODE_PAGE)
+                value = enc_str(value)
                 if not recursion:
                     value += b'\x00'
 
