@@ -314,7 +314,7 @@ def SaveToFile():
 
     scena.StringTableOffset = fs.tell()
 
-    fs.Write('\x00'.join(scena.StringTable).encode(CODE_PAGE) + b'\x00\x00')
+    fs.Write('\x00'.join(scena.StringTable).encode(CODE_PAGE) + b'\x00')
 
     zerostr = fs.tell() - 1
 

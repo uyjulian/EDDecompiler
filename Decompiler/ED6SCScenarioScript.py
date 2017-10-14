@@ -497,11 +497,14 @@ class ScenarioInfo:
         fs.seek(self.StringTableOffset)
 
         buf = fs.read()
-        endmz = buf.find(b'\x00\x00')
-        if endmz != -1:
-            buf = buf[:endmz]
+        #endmz = buf.find(b'\x00\x00')
+        #if endmz != -1:
+        #    buf = buf[:endmz]
 
-        self.StringTable = buf.decode(ed6sc.CODE_PAGE).rstrip('\x00').split('\x00')
+        if buf[-1] == 0:
+            buf = buf[0:-1]
+
+        self.StringTable = buf.decode(ed6sc.CODE_PAGE).split('\x00')
 
         if ExtractText:
             textPosTable[self.scenaName] = [self.StringTable]
