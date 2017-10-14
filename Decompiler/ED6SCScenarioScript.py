@@ -501,7 +501,7 @@ class ScenarioInfo:
         #if endmz != -1:
         #    buf = buf[:endmz]
 
-        if buf[-1] == 0:
+        if len(buf) > 0 and buf[-1] == 0:
             buf = buf[0:-1]
 
         self.StringTable = buf.decode(ed6sc.CODE_PAGE).split('\x00')
