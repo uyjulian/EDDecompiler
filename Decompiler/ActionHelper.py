@@ -2,6 +2,12 @@ from BattleActionScript import *
 import random
 import uuid
 
+def SetCodePage(cp):
+    global CODE_PAGE
+    CODE_PAGE = cp
+    edao.CODE_PAGE = cp
+    edao.edao_as_op_table.CodePage = cp
+
 def GenerateUniqueLable():
     return uuid.uuid4().hex
     #return '%X' % int(random.random() * 100000000000)

@@ -1,4 +1,4 @@
-from Assembler.Assembler2 import *
+from Assembler.Assembler2s import *
 from Base.EDAOBase import *
 import Instruction.ActionOpTableEDAO as edao
 import BattleMonsterStatus as MSFile
@@ -295,7 +295,9 @@ class BattleActionScriptInfo:
         #lines.append('from %s import *' % os.path.splitext(os.path.basename(__file__))[0])
         lines.append('from ActionHelper import *')
         lines.append('')
-
+        lines.append('SetCodePage("%s")'                          % edao.CODE_PAGE)
+        lines.append('')
+        
         name = os.path.splitext(os.path.basename(filename))[0]
         name = os.path.splitext(name)[0]
 
@@ -556,4 +558,30 @@ def procfile(file):
     asdat.SaveToFile(file + '.py')
 
 if __name__ == '__main__':
-    iterlib.forEachFileMP(procfile, sys.argv[1:], 'as*.dat')
+#    iterlib.forEachFileMP(procfile, sys.argv[1:], 'as*.dat')
+    cp = 'gbk'
+    start_argv = 1
+    if sys.argv[1].startswith('--cp='):
+        cp = sys.argv[1][5:]
+        start_argv = 2
+    elif sys.argv[1].startswith('--cppy='):
+        cppy = os.path.abspath(sys.argv[1][7:])
+        ccode = importlib.machinery.SourceFileLoader(os.path.basename(cppy).split('.')[0], cppy).load_module()
+        ccode.register()
+        cp = ccode.get_name()
+        start_argv = 2
+
+    edao.CODE_PAGE = cp
+    edao.edao_as_op_table.CodePage = cp
+
+    files = iterlib.forEachGetFiles(sys.argv[start_argv:], 'as*.dat')
+
+    #Log.OpenLog(sys.argv[start_argv] + '\..\log.txt')
+
+    for file in files:
+        plog('START %s' % file)
+        procfile(file)
+        plog('FINISHED %s' % file)
+
+    #Log.CloseLog()
+
