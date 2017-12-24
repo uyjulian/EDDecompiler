@@ -96,8 +96,26 @@ class HandlerData:
 #       return None
 #
 
+MAP_LABOFF_INDEX = {}
+USE_INDEX_LABEL_NAME = False
+
+def UseIndexLabelName():
+    global USE_INDEX_LABEL_NAME
+    USE_INDEX_LABEL_NAME = True
+
+def ResetIndex():
+    global MAP_LABOFF_INDEX
+    MAP_LABOFF_INDEX.clear()
+
 def DefaultGetLabelName(offset):
-    return 'loc_%X' % offset
+    global USE_INDEX_LABEL_NAME
+    global MAP_LABOFF_INDEX
+    if USE_INDEX_LABEL_NAME:
+        if MAP_LABOFF_INDEX.get(offset) is None:
+            MAP_LABOFF_INDEX[offset] = len(MAP_LABOFF_INDEX)
+        return 'loc_%d' % MAP_LABOFF_INDEX[offset]
+    else:
+        return 'loc_%X' % offset
 
 class InstructionTable(dict):
     def __init__(self, GetOpCode, WriteOpCode, GetLabelName = DefaultGetLabelName, CodePage = CODE_PAGE):

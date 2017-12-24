@@ -628,7 +628,7 @@ class ScenarioInfo:
 
             block = disasm.DisasmBlock2(data)
 
-            block.Name = 'Function_%d_%X' % (index, block.Offset)
+            block.Name = 'Function_%d_%X' % (index, block.Offset) if not USE_INDEX_LABEL_NAME else 'Function_%d' % index
             codeblocks.append(block)
 
             blockoffsetmap[func] = block
@@ -919,6 +919,7 @@ def main():
     files = []
     i = 1
     append_place_name = False
+    use_index_lable = False
 
     while i < len(sys.argv):
         if sys.argv[i].startswith('--cp='):
@@ -930,8 +931,10 @@ def main():
             cp = ccode.get_name()
         elif sys.argv[i].startswith('--gp='):
             gp = os.path.abspath(sys.argv[i][5:])
-        elif sys.argv[i] == '--append_place_name=True' or sys.argv[i] == '--append_place_name=true':
+        elif sys.argv[i].lower() == '--append_place_name=true':
             append_place_name = True
+        elif sys.argv[i].lower() == '--indexlabel=true':
+            use_index_lable = True
         else:
             files.extend(iterlib.forEachGetFiles(sys.argv[i], '*._SN'))
 
@@ -947,11 +950,20 @@ def main():
     GAME_PATH = gp
     setGamePath(gp)
     initDatFileNameTable(GAME_PATH)
+
+    global USE_INDEX_LABEL_NAME
+    if use_index_lable:
+        USE_INDEX_LABEL_NAME = True
+        ed63rd.USE_INDEX_LABEL_NAME = True
+        ed63rd.UseIndexLabelName()
     
     #Log.OpenLog(sys.argv[start_argv] + '\..\log.txt')
 
+    global LAMBDA_INDEX
     for file in files:
         plog('START %s' % file)
+        ed63rd.ResetIndex()
+        ed63rd.ResetLabmdaIndex()
         procfile(file, append_place_name)
         plog('FINISHED %s' % file)
 

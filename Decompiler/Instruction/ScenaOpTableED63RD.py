@@ -1105,6 +1105,11 @@ def scp_37(data):
 
         data.Instruction.OperandFormat = 'BB' + getopr(opr2)
 
+LAMBDA_INDEX = 0
+def ResetLabmdaIndex():
+    global LAMBDA_INDEX
+    LAMBDA_INDEX = 0
+
 def scp_lambda_worker(data, extra_length):
 
     if data.Reason == HANDLER_REASON_DISASM:
@@ -1144,7 +1149,13 @@ def scp_lambda_worker(data, extra_length):
         if lambdablock is None:
             return ['', '%s(0x%X, %d, %s)' % (data.TableEntry.OpName, target, tid, lambdablock)]
 
-        lambda_name = 'lambda_%X' % lambdablock.Offset
+        lambda_name = ''
+        global LAMBDA_INDEX
+        if USE_INDEX_LABEL_NAME:
+            lambda_name = 'lambda_%d' % LAMBDA_INDEX
+            LAMBDA_INDEX += 1
+        else:
+            lambda_name = 'lambda_%X' % lambdablock.Offset
 
         txt = ['', 'def %s():' % lambda_name]
 
