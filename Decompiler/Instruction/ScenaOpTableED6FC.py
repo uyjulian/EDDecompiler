@@ -383,6 +383,10 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
                 if not recursion:
                     value += b'\x00'
 
+            elif type(value) == bytes:
+                if not recursion:
+                    value += b'\x00'
+
             elif IsTupleOrList(value):
                 for x in value:
                     wstr(x, True)
@@ -1032,6 +1036,11 @@ def scp_2a(data):
 
         data.Instruction.OperandFormat = 'W' * min(0xC, len(data.Arguments))
 
+LAMBDA_INDEX = 0
+def ResetLabmdaIndex():
+    global LAMBDA_INDEX
+    LAMBDA_INDEX = 0
+
 def scp_lambda_worker(data, extra_length):
 
     if data.Reason == HANDLER_REASON_DISASM:
@@ -1067,7 +1076,13 @@ def scp_lambda_worker(data, extra_length):
         entry = data.TableEntry
         target, tid, lambdablock = ins.Operand
 
-        lambda_name = 'lambda_%X' % lambdablock.Offset
+        lambda_name = ''
+        global LAMBDA_INDEX
+        if USE_INDEX_LABEL_NAME:
+            lambda_name = 'lambda_%d' % LAMBDA_INDEX
+            LAMBDA_INDEX += 1
+        else:
+            lambda_name = 'lambda_%X' % lambdablock.Offset
 
         txt = ['', 'def %s():' % lambda_name]
 
