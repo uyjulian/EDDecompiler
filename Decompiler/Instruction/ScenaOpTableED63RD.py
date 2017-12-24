@@ -428,6 +428,10 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
                 if not recursion:
                     value += b'\x00'
 
+            elif type(value) == bytes:
+                if not recursion:
+                    value += b'\x00'
+
             elif IsTupleOrList(value):
                 for x in value:
                     wstr(x, True)
