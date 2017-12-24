@@ -244,10 +244,8 @@ InstructionNames[0xE4]  = 'OP_E4'
 InstructionNames[0xE5]  = 'OP_E5'
 InstructionNames[0xE6]  = 'OP_E6'
 InstructionNames[0xE7]  = 'OP_E7'
-InstructionNames[0xE8]  = 'OP_E8'
-InstructionNames[0xE9]  = 'OP_E9'
 InstructionNames[0xEA]  = 'OP_EA'
-InstructionNames[0xEB]  = 'OP_EB'
+InstructionNames[0xF7]  = 'OP_F7'
 
 
 for op, name in InstructionNames.items():
@@ -546,6 +544,9 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
                     string.append(strobj)
 
                     continue
+
+                elif ('932' in self.Container.CodePage or 'jis' in self.Container.CodePage.lower()) and b'\xA0' <= buf <= b'\xDF':
+                    pass
 
                 elif buf >= b'\x80':
 
@@ -1412,6 +1413,36 @@ def scp_c9(data):
                 break
             i += 1
 
+def scp_cb(data):
+
+    def getopr(opr1):
+        operand = ''
+        if opr1 != 0:
+            operand = 'B'
+
+        return operand
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'BB'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'BB' + getopr(opr1)
+
 def scp_cc(data):
 
     def getopr(opr1):
@@ -1421,6 +1452,9 @@ def scp_cc(data):
 
         elif opr1 == 1:
             operand = 'S'
+
+        elif opr1 == 3:
+            operand = 'B'
 
         return operand
 
@@ -1485,6 +1519,147 @@ def scp_d9(data):
     elif data.Reason == HANDLER_REASON_ASSEMBLE:
 
         data.Instruction.OperandFormat =  'B' + getopr(data.Arguments[0])
+
+def scp_dc(data): 
+    def getopr(opr1):
+        if opr1 == 1:
+            return 'B'
+        return ''
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'BB'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'BB' + getopr(opr1)
+
+def scp_e2(data): 
+    def getopr(opr1):
+        if opr1 == 0 or opr1 == 2 or opr1 == 3 or opr1 == 4 or opr1 == 9 or opr1 == 11:
+            return 'B'
+        elif opr1 == 5:
+            return 'IB'
+        elif opr1 == 6:
+            return 'H'
+        return ''
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'B'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'B' + getopr(opr1)
+
+def scp_e3(data): 
+    def getopr(opr1):
+        if opr1 == 0:
+            return 'BIB'
+        elif opr1 == 1:
+            return 'B'
+        elif opr1 == 4:
+            return 'BB'
+        elif opr1 == 5:
+            return 'B'
+        return ''
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'B'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'B' + getopr(opr1)
+
+def scp_e5(data): 
+    def getopr(opr1):
+        return 'I' if opr1 == 0 or opr1 == 1 or opr1 == 2 else ''
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'BBB'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'BBB' + getopr(opr1)
+
+def scp_e6(data): 
+    def getopr(opr1):
+        return 'B' if opr1 == 0 or opr1 == 1 else ''
+
+    if data.Reason == HANDLER_REASON_DISASM:
+
+        fs = data.FileStream
+        ins = data.Instruction
+
+        opr = 'B'
+        ins.OperandFormat = opr
+        ins.Operand = data.TableEntry.GetAllOperand(opr, fs)
+
+        operand = getopr(ins.Operand[0])
+        ins.OperandFormat += operand
+        ins.Operand += data.TableEntry.GetAllOperand(operand, fs)
+
+        return ins
+
+    elif data.Reason == HANDLER_REASON_ASSEMBLE:
+
+        opr1 = data.Arguments[0]
+
+        data.Instruction.OperandFormat = 'B' + getopr(opr1)
 
 def MakeScenarioFlags(offset, bit):
     return (offset << 3) | (bit & 7)
@@ -1692,7 +1867,7 @@ ed63rd_op_list = \
     inst(OP_A7,                     'WW'),
     inst(OP_A8,                     'B' * 5),
     inst(OP_A9,                     'B'),
-    inst(OP_AA),
+    inst(OP_AA,                     'I'),
     inst(OP_AB),
     inst(OP_AC,                     'W'),
     inst(OP_AD,                     'LWWL'),
@@ -1716,7 +1891,7 @@ ed63rd_op_list = \
     inst(OP_BF,                     'BBHH'),
     inst(OP_C0,                     'BLLLLLLLL'),
     inst(OP_C1,                     'BBL'),
-    inst(OP_C2),
+    inst(OP_C2,                     'BB'),
     inst(OP_C3,                     'W'),
     inst(OP_C4,                     'BL'),
     inst(OP_C5,                     'BWWWWWWWWWWWWLBS'),
@@ -1725,7 +1900,7 @@ ed63rd_op_list = \
     inst(OP_C8,                     'WWSBW'),
     inst(OP_C9,                     NO_OPERAND,     0,                                  scp_c9),
     inst(OP_CA,                     'BBL'),
-    inst(OP_CB,                     'B'),
+    inst(OP_CB,                     NO_OPERAND,     0,                                  scp_cb),
     inst(OP_CC,                     NO_OPERAND,     0,                                  scp_cc),
     inst(OP_CD,                     'W'),
     inst(OP_CE,                     NO_OPERAND,     0,                                  scp_ce),
@@ -1741,23 +1916,21 @@ ed63rd_op_list = \
     inst(OP_D8,                     'BW'),
     inst(OP_D9,                     NO_OPERAND,     0,                                  scp_d9),
     inst(OP_DA),
-    inst(OP_DB),
-    inst(OP_DC),
-    inst(OP_DD),
-    inst(OP_DE,                     'S'),
-    inst(OP_DF,                     'S'),
-    inst(OP_E0,                     'B' * 13),
-    inst(OP_E1,                     'B' * 2),
-    inst(OP_E2,                     'B' * 3),
-    inst(OP_E3,                     'B' * 4),
-    inst(OP_E4,                     'B' * 3),
-    inst(OP_E5,                     'B' * 3),
-    inst(OP_E6,                     'B' * 1),
-    inst(OP_E7,                     'BSBL'),
-    inst(OP_E8,                     'B' * 4),
-    inst(OP_E9,                     'B' * 1),
-    inst(OP_EA,                     'B' * 4),
-    inst(OP_EB,                     'B' * 2),
+    inst(OP_DB,                     'BB'),
+    inst(OP_DC,                     NO_OPERAND,     0,                                  scp_dc),
+    inst(OP_DD,                     'BBBIIII'),
+    inst(OP_DE,                     'BBB'),
+    inst(OP_DF,                     'BBB'),
+    inst(OP_E0,                     'HBB'),
+    inst(OP_E1,                     'BB'),
+    inst(OP_E2,                     NO_OPERAND,     0,                                  scp_e2),
+    inst(OP_E3,                     NO_OPERAND,     0,                                  scp_e3),
+    inst(OP_E4,                     'B' * 4),
+    inst(OP_E5,                     NO_OPERAND,     0,                                  scp_e5),
+    inst(OP_E6,                     NO_OPERAND,     0,                                  scp_e6),
+    inst(OP_E7,                     'BBBBBBI'),
+    inst(OP_EA),
+    inst(OP_F7,                     'BWB'),
 ]
 
 del inst
