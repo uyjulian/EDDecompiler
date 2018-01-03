@@ -46,7 +46,7 @@ And install missing libs with this command:
 ```
 
 Scripts of *Zero no Kiseki* / *Ao no Kiseki* are **\.bin** files in `<game folder>/data/scena`.    
-For *Trails in the Sky* series, they are **\.\_SN** files extracted from **ED6_DT01.dat** with tool [**falcncvt tool**](http://www.pokanchan.jp/dokuwiki/software/falcnvrt/start). 
+For *Trails in the Sky* series, they are **\.\_SN** files extracted from **ED6_DT01.dat**/**ED6_DT21.dat** with tool [**falcncvt tool**](http://www.pokanchan.jp/dokuwiki/software/falcnvrt/start). 
 
 Parameter **--cp=\<codepage\>** is setting the codepage, default is gbk.   
 **NOTE**: The codepage of *Trails in the Sky* series (English version) is **ms932**, **NOT** ASCII.
