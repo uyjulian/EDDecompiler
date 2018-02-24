@@ -506,6 +506,12 @@ class ScenarioInfo:
 
         self.StringTable = buf.decode(ed6fc.CODE_PAGE).split('\x00')
 
+        l = len(self.StringTable)
+        while l > 1 and len(self.StringTable[l-1]) == 0:
+            l -= 1
+        if l < len(self.StringTable) - 5:
+            self.StringTable = self.StringTable[0:l + 5]
+
         if ExtractText:
             textPosTable[self.scenaName] = [self.StringTable]
         else:
