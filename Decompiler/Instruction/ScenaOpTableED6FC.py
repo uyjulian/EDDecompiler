@@ -447,6 +447,8 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
             string = []
             tmpstr = ''
 
+            notJis = not ('932' in self.Container.CodePage or 'shift' in self.Container.CodePage.lower())
+
             while True:
                 buf = fs.read(1)
 
@@ -505,8 +507,8 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
                     continue
 
                 elif buf >= b'\x80':
-
-                    buf += fs.read(1)
+                    if notJis or buf < b'\xA0' or buf >= b'\xE0':
+                        buf += fs.read(1)
 
                 tmpstr += buf.decode(self.Container.CodePage)
 
