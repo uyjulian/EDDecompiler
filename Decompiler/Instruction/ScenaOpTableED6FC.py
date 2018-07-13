@@ -369,7 +369,7 @@ class ED6FCScenaInstructionTableEntry(InstructionTableEntry):
                     ret.append(ord(str[i]))
                     i += 1
                 else:
-                    ret.extend(str[i].encode(CODE_PAGE))
+                    ret.extend(str[i].replace('à','ｱ').replace('â','ｲ').replace('À','ｳ').replace('é','ｴ').replace('è','ｵ').replace('ê','ｶ').replace('É','ｷ').replace('È','ｸ').replace('ù','ｹ').replace('û','ｺ').replace('ô','ｻ').replace('Ô','ｼ').replace('ç','ｽ').replace('Ç','ｾ').replace('ï','ｿ').replace('î','ﾀ').replace('α','ﾁ').replace('β','ﾂ').replace('Œ','ﾃ').replace('œ','ﾄ').replace('Í','ﾅ').replace('í','ﾆ').replace('Ã','ﾇ').replace('ã','ﾈ').replace('Õ','ﾉ').replace('õ','ﾊ').replace('Ó','ﾋ').replace('ó','ﾌ').replace('ú','ﾍ').replace('Ú','ﾎ').replace('ñ','ﾏ').replace('¿','ﾐ').replace('¡','ﾑ').encode(CODE_PAGE))
                     i += 1
             return bytes(ret)
 
