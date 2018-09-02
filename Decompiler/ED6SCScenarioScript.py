@@ -950,7 +950,7 @@ def main():
     CODE_PAGE = cp
     ed6sc.CODE_PAGE = cp
     ed6sc.ed6sc_op_table.CodePage = cp
-    setCodePage(cp);
+    setCodePage(cp)
 
     global GAME_PATH
     GAME_PATH = gp
