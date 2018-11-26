@@ -2,6 +2,9 @@ from Assembler.Assembler2 import *
 from Base.ED6FCBase import *
 import Instruction.ScenaOpTableED6SC as ed6sc
 
+import importlib.machinery
+import os
+
 ExtractText = not True
 # ed6sc.CODE_PAGE = '932'
 # CODE_PAGE = ed6sc.CODE_PAGE
