@@ -2,6 +2,9 @@ from Assembler.Assembler2 import *
 from Base.ED6FCBase import *
 import Instruction.ScenaOpTableED6SC as ed6sc
 
+import importlib.machinery
+import os
+
 ExtractText = not True
 # ed6sc.CODE_PAGE = '932'
 # CODE_PAGE = ed6sc.CODE_PAGE
@@ -950,7 +953,7 @@ def main():
     CODE_PAGE = cp
     ed6sc.CODE_PAGE = cp
     ed6sc.ed6sc_op_table.CodePage = cp
-    setCodePage(cp);
+    setCodePage(cp)
 
     global GAME_PATH
     GAME_PATH = gp
